@@ -3,7 +3,7 @@ const port = 3000
 
 
 const server = http.createServer((req, res) => {
-    res.write("Hello, mother fuckers noder users")
+    res.write("Hello, mother fuckers noder usersasdasd")
     res.end()
 })
 
