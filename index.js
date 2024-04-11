@@ -11,14 +11,10 @@ const getHtml = async () => {
 http.createServer(async (request, response) => {  
     let html = await getHtml();
     if (request.url != null && request.url == "/" || request.url == "/index.html" ) {
-        setTimeout(() => {
-            console.log("this is the first message");
-          }, 10000);
         response.writeHead(200,
             {"Content-Type" : "text/html"})
         response.end(html); 
     } else {
-        console.log("this is the second message");
         response.writeHead(400,
             {"Content-Type" : "text/plain"})
         response.end("Sorry!!!");  
