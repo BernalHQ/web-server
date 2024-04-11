@@ -1,15 +1,32 @@
 const http = require("http")
-const port = 3000
+const fs = require("fs/promises")
+const port = 80
+
+const getHtml = async () => {
+    const html = await fs.readFile("index.html");
+    return html
+}
 
 
-const server = http.createServer((req, res) => {
-    res.write("Hello, mother fuckers noder usersasdasd")
-    res.end()
-})
-
-server.listen(port, (err) => {
-    if (err) {
-        console.log("Something went wrong")
+http.createServer(async (request, response) => {  
+    let html = await getHtml();
+    if (request.url != null && request.url == "/" || request.url == "/index.html" ) {
+        setTimeout(() => {
+            console.log("this is the first message");
+          }, 10000);
+        response.writeHead(200,
+            {"Content-Type" : "text/html"})
+        response.end(html); 
+    } else {
+        console.log("this is the second message");
+        response.writeHead(400,
+            {"Content-Type" : "text/plain"})
+        response.end("Sorry!!!");  
     }
+
+}).listen(port, () => {
     console.log("Server is running on port " + port)
-})
+});
+
+
+
